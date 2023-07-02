@@ -27,7 +27,7 @@ class StoreAutherRequest extends FormRequest
             'email' => 'required|email|unique:authers',
             'password' => 'required|string|min:6',
             'gender' => 'nullable|in:male,female,other',
-            'image' => 'nullable|image',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 }

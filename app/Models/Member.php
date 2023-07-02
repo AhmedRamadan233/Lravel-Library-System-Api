@@ -22,4 +22,7 @@ class Member extends Model
         'banded_at',
     ];
     
+    public function getImageUrlAtteribute(){
+        return Storage::disk('images')->url($this->image);
+    }
 }

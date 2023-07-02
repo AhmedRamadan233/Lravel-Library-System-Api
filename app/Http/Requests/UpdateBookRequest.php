@@ -34,7 +34,7 @@ class UpdateBookRequest extends FormRequest
             'shelf_num' => 'required|integer',
             'num_of_borrowing' => 'required|integer',
             'num_of_reading' => 'required|integer',
-            'image' => 'nullable|image',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 }
