@@ -7,10 +7,13 @@ use App\Models\Auther;
 use App\Http\Requests\StoreAutherRequest;
 use App\Http\Requests\UpdateAutherRequest;
 use Illuminate\Http\Request;
+use App\Traits\ImageProcessing;
 
 
 class AutherController extends Controller
 {
+    use ImageProcessing;
+
     private function isEmpty($value)
     {
         return $value->count() === 0;
@@ -35,16 +38,18 @@ class AutherController extends Controller
     {
         try {
             $validatedData = $request->validated();
-            
+            $imagePath = $this->saveImage($request->file('image'));
+
             $author = new Auther();
             $author->first_name = $request->post('first_name');
             $author->last_name = $request->post('last_name');
             $author->email = $request->post('email');
             $author->password = $request->post('password');
             $author->gender = $request->post('gender');
-            $author->image = $request->post('image');
+            $author->image = $imagePath;
             $author->save();
-            
+            $author->image_url = asset('imagesfp/authors/' . $author->image);
+
             return response()->json(['message' => 'Author created successfully', 'author' => $author], 201);
         } catch (QueryException $exception) {
             return response()->json(['message' => 'Failed to create author. Missing required field.'], 400);
@@ -59,7 +64,6 @@ class AutherController extends Controller
             return $this->errorResponse('Author not found with ID: ' . $id, 404);
         }
 
-        try {
             $validatedData = $request->validated();
 
             $author->first_name = $request->post('first_name');
@@ -67,13 +71,19 @@ class AutherController extends Controller
             $author->email = $request->post('email');
             $author->password = $request->post('password');
             $author->gender = $request->post('gender');
-            $author->image = $request->post('image');
+            if ($request->hasFile('image')) {
+                if ($author->image) {
+                    $this->deleteImage($author->image); // Delete old image
+                }
+        
+                $imagePath = $this->saveImage($request->file('image')); // Save new image
+                $author->image = $imagePath;
+            }            
             $author->save();
+            $author->image_url = asset('imagesfp/authors/' . $author->image);
 
-            return response()->json(['message' => 'Author updated successfully']);
-        } catch (QueryException $exception) {
-            return response()->json(['message' => 'Failed to update author. Missing required field.'], 400);
-        }
+            return response()->json(['message' => 'Author updated successfully', 'author' => $author], 200);
+
     }
 
     public function deleteAuthor($id)
@@ -84,7 +94,9 @@ class AutherController extends Controller
             if (!$author) {
                 return $this->errorResponse('Author not found with ID: ' . $id, 404);
             }
-    
+            if ($author->image) {
+                $this->deleteImage($author->image); // Delete the associated image
+            }
             $author->delete();
     
             return response()->json(['data' => 'Deleted Author with ID: ' . $id], 200);

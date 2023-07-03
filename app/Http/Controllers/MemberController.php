@@ -52,7 +52,7 @@ class MemberController extends Controller
     
             $member->save();
     
-            $member->image_url = asset('imagesfp/' . $member->image);
+            $member->image_url = asset('imagesfp/members/' . $member->image);
 
             return response()->json(['message' => 'Member created successfully', 'member' => $member], 201);
         } catch (QueryException $exception) {
@@ -90,7 +90,7 @@ class MemberController extends Controller
         $member->save();
     
         // Assuming $member->image is the URL of the image
-         $member->image_url = asset('imagesfp/' . $member->image);
+         $member->image_url = asset('imagesfp/members/' . $member->image);
 
     
         return response()->json(['message' => 'Member created successfully', 'member' => $member], 200);
