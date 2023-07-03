@@ -24,7 +24,7 @@ class UpdateMemberRequest extends FormRequest
         return [
             'first_name' => 'required|string',
             'last_name' => 'required|string',
-            'email' => 'required|email|unique:members,email,' . ($this->route('member') ? $this->route('member')->id : ''),
+            'email' => 'required|email|' . ($this->route('member') ? $this->route('member')->id : ''),
             'phone_number' => 'nullable|string',
             'address' => 'nullable|json',
             'password' => 'nullable|string|min:6',

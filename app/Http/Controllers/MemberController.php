@@ -30,121 +30,87 @@ class MemberController extends Controller
         
         return response()->json(['authors' => $getAllMembers]);
     }
-
-
     public function createMember(StoreMemberRequest $request)
     {
         try {
-            
             $validatedData = $request->validated();
-
+    
+            // Save the member's image and get the image path
+            $imagePath = $this->saveImage($request->file('image'));
+    
             $member = new Member();
-
-            $member->first_name = $request->post('first_name');
-            $member->last_name = $request->post('last_name');
-            $member->email = $request->post('email');
-            $member->phone_number = $request->post('phone_number');
-            $member->address = $request->post('address');
-            $member->password = $request->post('password');
-            $member->gender = $request->post('gender');
-            $member->birth_date = $request->post('birth_date');
-
-            if ($request->hasFile('image')) {
-                if ($member->image) {
-                    $this->deleteImage($member->image);
-                }
-
-                $imagePath = $this->saveImage($request->file('image'));
-                $member->image = $imagePath;
-                $member->image = asset('imagesfp/'.$imagePath);
-                // http://localhost:8000/imagesfp/nR6HpdCr1688315046.jpg
-                // $member->image ? $member->image = $member->image_url : null;
-
-            }
-
+    
+            $member->first_name = $request->input('first_name');
+            $member->last_name = $request->input('last_name');
+            $member->email = $request->input('email');
+            $member->phone_number = $request->input('phone_number');
+            $member->address = $request->input('address');
+            $member->password = $request->input('password');
+            $member->gender = $request->input('gender');
+            $member->birth_date = $request->input('birth_date');
+            $member->image = $imagePath; // Save the image path to the member model
+    
             $member->save();
-            $member->refresh();
+    
+            $member->image_url = asset('imagesfp/' . $member->image);
 
             return response()->json(['message' => 'Member created successfully', 'member' => $member], 201);
         } catch (QueryException $exception) {
             return response()->json(['message' => 'Failed to create member. Missing required field.'], 400);
         }
     }
-
     
-    
-
-
-
     public function updateMember(UpdateMemberRequest $request, $id)
     {
-        try {
-            $member = Member::find($id);
+        $member = Member::find($id);
     
-            if (!$member) {
-                return $this->errorResponse('Member not found with ID: ' . $id, 404);
-            }
-    
-            $validatedData = $request->validated();
-            $member->first_name = $request->post('first_name');
-            $member->last_name = $request->post('last_name');
-            $member->email = $request->post('email');
-            $member->phone_number = $request->post('phone_number');
-            $member->address = $request->post('address');
-            $member->password = $request->post('password');
-            $member->gender = $request->post('gender');
-            $member->birth_date = $request->post('birth_date');
-    
-            if ($request->hasFile('image')) {
-                if ($member->image) {
-                    $this->deleteImage($member->image);
-                }
-            
-                $imagePath = $this->saveImage($request->file('image'));
-                $member->image = $imagePath;
-                $member->image = asset('imagesfp/'.$imagePath);
-            } elseif ($request->filled('delete_image')) {
-                if ($member->image) {
-                    $this->deleteImage($member->image);
-                    $member->image = null;
-                    $member->image = null;
-                }
-            }
-            
-            $member->save();
-            
-    
-            return response()->json(['message' => 'Member updated successfully', 'member' => $member]);
-        } catch (ValidationException $exception) {
-            return response()->json(['message' => 'Failed to create member. Missing required field.', 'errors' => $exception->errors()], 400);
+        if (!$member) {
+            return $this->errorResponse('Member not found with ID: ' . $id, 404);
         }
-        
-            
+    
+        $validatedData = $request->validated();
+        $member->first_name = $request->input('first_name');
+        $member->last_name = $request->input('last_name');
+        $member->email = $request->input('email');
+        $member->phone_number = $request->input('phone_number');
+        $member->address = $request->input('address');
+        $member->password = $request->input('password');
+        $member->gender = $request->input('gender');
+        $member->birth_date = $request->input('birth_date');
+    
+        if ($request->hasFile('image')) {
+            if ($member->image) {
+                $this->deleteImage($member->image); // Delete old image
+            }
+    
+            $imagePath = $this->saveImage($request->file('image')); // Save new image
+            $member->image = $imagePath;
+        }
+    
+        $member->save();
+    
+        // Assuming $member->image is the URL of the image
+         $member->image_url = asset('imagesfp/' . $member->image);
+
+    
+        return response()->json(['message' => 'Member created successfully', 'member' => $member], 200);
         
     }
     
-    // catch (ValidationException $exception) {
-    //     return response()->json(['message' => 'Failed to create member. Missing required field.', 'errors' => $exception->errors()], 400);
-    // }
-    
-
-    
-    
     public function deleteMember($id)
     {
-        try {
-            $member = Member::find($id);
-    
-            if (!$member) {
-                return $this->errorResponse('Member not found with ID: '.$id, 404);
-            }
-    
-            $member->delete();
-    
-            return response()->json(['data' => 'Deleted Member with ID: '.$id], 200);
-        } catch (QueryException $exception) {
-            return response()->json(['message' => 'Failed to delete member.'], 500);
+        $member = Member::find($id);
+
+        if (!$member) {
+            return $this->errorResponse('Member not found with ID: '.$id, 404);
         }
+        if ($member->image) {
+            $this->deleteImage($member->image); // Delete the associated image
+        }
+        $member->delete();
+
+        return response()->json(['data' => 'Deleted Member with ID: '.$id], 200);
+        
     }
     
 }
