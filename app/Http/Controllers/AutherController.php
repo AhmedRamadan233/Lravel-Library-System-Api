@@ -20,7 +20,9 @@ class AutherController extends Controller
 
     public function getAllAuthor(Request $request)
     {
-        $getAllAuthor = Auther::query()->paginate(5);
+        $filters = $request->query();
+
+        $getAllAuthor = Auther::filter($filters)->paginate();
 
         if ($this->isEmpty($getAllAuthor)) {
             return response()->json('Auther collection is empty');

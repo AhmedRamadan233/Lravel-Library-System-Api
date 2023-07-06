@@ -15,9 +15,15 @@ class CategoryController extends Controller
     {
         return $value->count() === 0;
     }
+
+   
+
+    // Add any additional logic or data manipulation if needed
+
     public function getAllCategories(Request $request)
     {
-        $getAllCategories = Category::query()->paginate(5);
+        $filters = $request->query();
+        $getAllCategories = Category::filter($filters)->paginate();
         if ($this->isEmpty($getAllCategories)) {
             return response()->json('Category collection is empty');
         }

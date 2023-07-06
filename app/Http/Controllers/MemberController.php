@@ -15,7 +15,9 @@ class MemberController extends Controller
     }
     public function getAllMembers(Request $request)
     {
-        $getAllMembers = Member::query()->paginate(5);
+        $filters = $request->query();
+
+        $getAllMembers = Member::filter($filters)->paginate();
 
         if ($this->isEmpty($getAllMembers)) {
             return response()->json('Member collection is empty');

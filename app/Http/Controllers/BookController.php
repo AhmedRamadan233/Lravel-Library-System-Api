@@ -20,7 +20,9 @@ class BookController extends Controller
 
     public function getAllBooks(Request $request)
     {
-        $allBooks = Book::query()->paginate(5);
+        $filters = $request->query();
+
+        $allBooks = Book::filter($filters)->paginate();
         if ($this->isEmpty($allBooks)) {
             return response()->json('Books collection is empty');
         }

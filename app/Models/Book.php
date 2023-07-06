@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -32,5 +33,18 @@ class Book extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function getImageUrlAttribute()
+    {
+        return asset('imagesfp/' . $this->image);
+    }
+
+    public function scopeFilter(Builder $builder, $filters)
+    {
+        $title = $filters['title'] ?? null;
+        if ($title) {
+            $builder->where('title', 'LIKE', "%$title%");
+        }
     }
 }
