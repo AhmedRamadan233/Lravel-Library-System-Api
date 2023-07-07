@@ -51,7 +51,6 @@ class MemberController extends Controller
         $validatedData = $request->validated();
         $member->first_name = $request->input('first_name');
         $member->last_name = $request->input('last_name');
-        $member->email = $request->input('email');
         $member->phone_number = $request->input('phone_number');
         $member->address = $request->input('address');
         $member->password = $request->input('password');
