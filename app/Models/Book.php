@@ -25,6 +25,16 @@ class Book extends Model
         'num_of_reading',
         'image',
     ];
+
+    protected $hidden = [
+        'author_id',
+        'category_id',
+        'created_at',
+        'updated_at',
+        // Any other fields you want to hide
+    ];   
+
+
     public function author()
     {
         return $this->belongsTo(Auther::class);
@@ -44,11 +54,32 @@ class Book extends Model
     {
         $title = $filters['title'] ?? null;
         $publisher = $filters['publisher'] ?? null;
-        $available = $filters['available'] ?? null;
+        // $available = $filters['available'] ?? null;
 
         $author = $filters['author'] ?? null;
         $category = $filters['category'] ?? null;
 
+// ----------------------this code dont work -------------------------------------------------
+        $availableGtValue = $filters['available[gt]'] ?? null;
+
+        if ($availableGtValue !== null) {
+            $builder->where('available', '>', $availableGtValue);
+        }
+        
+        $availableLtValue = $filters['available[lt]'] ?? null;
+        
+        if ($availableLtValue !== null) {
+            $builder->where('available', '<', $availableLtValue);
+        }
+        
+        $availableEqValue = $filters['available[eq]'] ?? null;
+        
+        if ($availableEqValue !== null) {
+            $builder->where('available', '=', $availableEqValue);
+        }
+// -----------------------------------------------------------------------
+
+        
         
         if ($title) {
             $builder->where('title', 'LIKE', "%$title%");
@@ -56,9 +87,9 @@ class Book extends Model
         if ($publisher) {
             $builder->where('publisher', 'LIKE', "%$publisher%");
         }
-        if ($available) {
-            $builder->where('available', '=', $available);
-        }
+        // if ($available) {
+        //     $builder->where('available', '=', $available);
+        // }
         if ($author) {
             $builder->whereHas('author', function ($query) use ($author) {
                 $query->where('first_name', 'LIKE', "%$author%");
@@ -71,3 +102,4 @@ class Book extends Model
         }
     }
 }
+

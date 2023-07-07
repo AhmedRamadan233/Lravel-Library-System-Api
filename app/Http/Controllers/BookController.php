@@ -22,12 +22,24 @@ class BookController extends Controller
     {
         $filters = $request->query();
 
-        $allBooks = Book::filter($filters)->paginate();
-        if ($this->isEmpty($allBooks)) {
+        $allBooks = Book::filter($filters)
+            ->with([
+                'author' => function ($query) {
+                    $query->select('id', 'first_name', 'last_name');
+                },
+                'category' => function ($query) {
+                    $query->select('id', 'name');
+                }
+            ])
+            ->paginate();
+
+        // If there are no books available
+        if ($allBooks->isEmpty()) {
             return response()->json('Books collection is empty');
         }
-        
+
         return response()->json(['books' => $allBooks]);
+
     }
 
 
