@@ -27,7 +27,7 @@ class Book extends Model
     ];
     public function author()
     {
-        return $this->belongsTo(Author::class);
+        return $this->belongsTo(Auther::class);
     }
 
     public function category()
@@ -43,8 +43,31 @@ class Book extends Model
     public function scopeFilter(Builder $builder, $filters)
     {
         $title = $filters['title'] ?? null;
+        $publisher = $filters['publisher'] ?? null;
+        $available = $filters['available'] ?? null;
+
+        $author = $filters['author'] ?? null;
+        $category = $filters['category'] ?? null;
+
+        
         if ($title) {
             $builder->where('title', 'LIKE', "%$title%");
+        }
+        if ($publisher) {
+            $builder->where('publisher', 'LIKE', "%$publisher%");
+        }
+        if ($available) {
+            $builder->where('available', '=', $available);
+        }
+        if ($author) {
+            $builder->whereHas('author', function ($query) use ($author) {
+                $query->where('first_name', 'LIKE', "%$author%");
+            });
+        }
+        if ($category) {
+            $builder->whereHas('category', function ($query) use ($category) {
+                $query->where('name', 'LIKE', "%$category%");
+            });
         }
     }
 }
