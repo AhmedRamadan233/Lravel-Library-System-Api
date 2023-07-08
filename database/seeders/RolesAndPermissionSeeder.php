@@ -72,8 +72,22 @@ class RolesAndPermissionSeeder extends Seeder
         'manage-members',
         'view-system-data',
         'generate-reports',
-        'view-profile',
-        'update-profile',
+        // ----------
+        'view-profile-super-admin',
+        'update-profile-super-admin',
+        // -----------
+                    // ----------
+        'view-profile-admin',
+        'update-profile-admin',
+        // -----------
+        // ----------
+        'view-profile-employee',
+        'update-profile-employee',
+        // -----------
+        // ----------
+        'view-profile-member',
+        'update-profile-member',
+        // -----------
         'search-employees',
         'add-member',
         'list-members',
@@ -84,6 +98,18 @@ class RolesAndPermissionSeeder extends Seeder
         'give-books-for-reading',
         'return-borrowed-books',
         'view-late-returns',
+        'list-reading-books',
+        'filter-reading-books',
+        'list-borrowed-books',
+        'filter-borrowed-books',
+        'view-new-arrived-books',
+        'view-borrowed-books',
+        'search-available-books',
+        'view-new-arrived-books-stats',
+        'role-list',
+        'role-create',
+        'role-edit',
+        'role-delete'
     ];
 
     // Create permissions
@@ -104,19 +130,57 @@ class RolesAndPermissionSeeder extends Seeder
             'manage-members',
             'view-system-data',
             'generate-reports',
+            // ----------
+            'view-profile-super-admin',
+            'update-profile-super-admin',
+            // -----------
+                        // ----------
+            'view-profile-admin',
+            'update-profile-admin',
+            // -----------
+            // ----------
+            'view-profile-employee',
+            'update-profile-employee',
+            // -----------
+            // ----------
+            'view-profile-member',
+            'update-profile-member',
+            // -----------
+            'search-employees',
+            'add-member',
+            'list-members',
+            'search-members',
+            'list-books',
+            'search-books',
+            'borrow-books',
+            'give-books-for-reading',
+            'return-borrowed-books',
+            'view-late-returns',
+            'list-reading-books',
+            'filter-reading-books',
+            'list-borrowed-books',
+            'filter-borrowed-books',
+            'view-new-arrived-books',
+            'view-borrowed-books',
+            'search-available-books',
+            'view-new-arrived-books-stats',
+            'role-list',
+            'role-create',
+            'role-edit',
+            'role-delete'
         ],
         'admin' => [
             'manage-employees',
-            'view-profile',
-            'update-profile',
+            'view-profile-admin',
+            'update-profile-admin',
             'search-employees',
             'manage-books',
             'view-system-data',
         ],
         'employee' => [
             'add-member',
-            'view-profile',
-            'update-profile',
+            'view-profile-employee',
+            'update-profile-employee',
             'list-members',
             'manage-members',
             'search-members',
