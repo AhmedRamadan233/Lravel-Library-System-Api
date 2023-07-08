@@ -54,47 +54,42 @@ class Book extends Model
     {
         $title = $filters['title'] ?? null;
         $publisher = $filters['publisher'] ?? null;
-        // $available = $filters['available'] ?? null;
 
         $author = $filters['author'] ?? null;
         $category = $filters['category'] ?? null;
 
-// ----------------------this code dont work -------------------------------------------------
-        $availableGtValue = $filters['available[gt]'] ?? null;
+        $availableEqValue = $filters['availableeq'] ?? null;
+        $availableLtValue = $filters['availablelt'] ?? null;
+        $availableGtValue = $filters['availablegt'] ?? null;
+
 
         if ($availableGtValue !== null) {
             $builder->where('available', '>', $availableGtValue);
         }
         
-        $availableLtValue = $filters['available[lt]'] ?? null;
-        
         if ($availableLtValue !== null) {
             $builder->where('available', '<', $availableLtValue);
         }
         
-        $availableEqValue = $filters['available[eq]'] ?? null;
         
         if ($availableEqValue !== null) {
             $builder->where('available', '=', $availableEqValue);
         }
-// -----------------------------------------------------------------------
-
-        
         
         if ($title) {
             $builder->where('title', 'LIKE', "%$title%");
         }
+
         if ($publisher) {
             $builder->where('publisher', 'LIKE', "%$publisher%");
         }
-        // if ($available) {
-        //     $builder->where('available', '=', $available);
-        // }
+
         if ($author) {
             $builder->whereHas('author', function ($query) use ($author) {
                 $query->where('first_name', 'LIKE', "%$author%");
             });
         }
+
         if ($category) {
             $builder->whereHas('category', function ($query) use ($category) {
                 $query->where('name', 'LIKE', "%$category%");
