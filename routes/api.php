@@ -36,9 +36,11 @@ Route::post('login', [LoginController::class, 'login']);
 
 
 Route::middleware('auth:sanctum')->group(function () {
+   
     Route::middleware('auth:api')->get('/user', function (Request $request) {
         return $request->user();
     });
+    
     Route::resource('roles', RolesAndPermissionController::class);
 
     Route::prefix('books')->group(function () {

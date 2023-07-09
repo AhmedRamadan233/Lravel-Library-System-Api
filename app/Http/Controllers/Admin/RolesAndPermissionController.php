@@ -46,4 +46,15 @@ class RolesAndPermissionController extends Controller
             'data' => $role
         ], 200);
     }
+
+
+    public function destroy($id)
+    {
+   
+            $role = Role::findOrFail($id);
+            $role->syncPermissions([]);
+            $role->delete();
+            return response()->json(['success' => true, 'data' => 'Deleted role with name: '.$role->name], 200);
+    }
+
 }
