@@ -11,11 +11,13 @@ class RolesAndPermissionUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        if ($this->user()->can('role-edit')){
+        // Check if the user can make any permission as "edit"
+        if ($this->user()->can('role-edit')) {
             return true;
         }
         return false;
     }
+    
 
     /**
      * Get the validation rules that apply to the request.

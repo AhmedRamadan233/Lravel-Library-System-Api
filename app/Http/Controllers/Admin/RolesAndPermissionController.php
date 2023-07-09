@@ -23,6 +23,7 @@ class RolesAndPermissionController extends Controller
     // }
     public function index(Request $request)
     {
+        $this->authorizeChecked('role-list');
         $roles = Role::all();
         $permissions = Permission::all();
         return response()->json([
@@ -34,6 +35,7 @@ class RolesAndPermissionController extends Controller
 
     public function store(RolesAndPermissionRequest $request)
     {
+        $this->authorizeChecked('role-create');
         $data = $request->validated();
         
         $role = Role::create([
@@ -75,11 +77,12 @@ class RolesAndPermissionController extends Controller
     }
     public function destroy($id)
     {
+        $this->authorizeChecked('role-delete');
    
-            $role = Role::findOrFail($id);
-            $role->syncPermissions([]);
-            $role->delete();
-            return response()->json(['success' => true, 'data' => 'Deleted role with name: '.$role->name], 200);
+        $role = Role::findOrFail($id);
+        $role->syncPermissions([]);
+        $role->delete();
+        return response()->json(['success' => true, 'data' => 'Deleted role with name: '.$role->name], 200);
     }
 
 }

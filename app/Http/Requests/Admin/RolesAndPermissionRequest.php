@@ -12,7 +12,7 @@ class RolesAndPermissionRequest extends FormRequest
     public function authorize(): bool
     {
        // Check if the user can make any permission as "edit"
-        if ($this->user()->can('role-edit')) {
+        if ($this->user()->can('role-create')) {
             return true;
         }
         return false;
