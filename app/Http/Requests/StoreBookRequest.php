@@ -12,7 +12,7 @@ class StoreBookRequest extends FormRequest
     public function authorize(): bool
     {
         // Check if the user can make any permission as "edit"
-        if ($this->user()->can('role-create')) {
+        if ($this->user()->can('add-book')) {
             return true;
         }
         return false;

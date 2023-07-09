@@ -13,14 +13,7 @@ use App\Traits\AuthorizeChecked;
 class RolesAndPermissionController extends Controller
 {
     use AuthorizeChecked;
-    // function __construct()
-    // {
-    //     $this->middleware('auth:api');
-    //     $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
-    //     $this->middleware('permission:role-create', ['only' => ['store']]);
-    //     $this->middleware('permission:role-edit', ['only' => ['update']]);
-    //     $this->middleware('permission:role-delete', ['only' => ['destroy']]);
-    // }
+
     public function index(Request $request)
     {
         $this->authorizeChecked('role-list');

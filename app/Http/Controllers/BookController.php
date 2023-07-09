@@ -7,10 +7,11 @@ use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use Illuminate\Http\Request;
 use App\Traits\ImageProcessing;
+use App\Traits\AuthorizeChecked ;
 
 class BookController extends Controller
 {
-    use ImageProcessing;
+    use ImageProcessing , AuthorizeChecked;
 
     private function isEmpty($value)
     {
@@ -20,6 +21,7 @@ class BookController extends Controller
 
     public function getAllBooks(Request $request)
     {
+        $this->authorizeChecked('list-book');
         $filters = $request->query();
 
         $allBooks = Book::filter($filters)
@@ -45,6 +47,7 @@ class BookController extends Controller
 
     public function createBook(StoreBookRequest $request)
     {
+        $this->authorizeChecked('add-book');
         $validatedData = $request->validated();
         $imagePath = $this->saveImage($request->file('image'));
         $book = new Book();
@@ -72,6 +75,7 @@ class BookController extends Controller
 
     public function updateBook(UpdateBookRequest $request, $id)
     {
+        $this->authorizeChecked('update-book');
         $book = Book::findOrFail($id);
         $validatedData = $request->validated();
         $book->title = $request->post('title');
@@ -102,6 +106,7 @@ class BookController extends Controller
     
     public function deleteBook($id)
     {
+        $this->authorizeChecked('delete-book');
         $book = Book::findOrFail($id);
         if ($book->image) {
             $this->deleteImage($book->image); // Delete the associated image

@@ -7,11 +7,11 @@ use App\Http\Requests\StoreAutherRequest;
 use App\Http\Requests\UpdateAutherRequest;
 use Illuminate\Http\Request;
 use App\Traits\ImageProcessing;
-
+use App\Traits\AuthorizeChecked ;
 
 class AutherController extends Controller
 {
-    use ImageProcessing;
+    use ImageProcessing , AuthorizeChecked;
 
     private function isEmpty($value)
     {
@@ -20,6 +20,7 @@ class AutherController extends Controller
 
     public function getAllAuthor(Request $request)
     {
+        $this->authorizeChecked('list-author');
         $filters = $request->query();
 
         $getAllAuthor = Auther::filter($filters)->paginate();
@@ -32,6 +33,7 @@ class AutherController extends Controller
     }
     public function createAuthor(StoreAutherRequest $request)
     {
+        $this->authorizeChecked('add-author');
         $validatedData = $request->validated();
         $imagePath = $this->saveImage($request->file('image'));
         $author = new Auther();
@@ -48,6 +50,7 @@ class AutherController extends Controller
     
     public function updateAuthor(UpdateAutherRequest $request, $id)
     {
+        $this->authorizeChecked('update-author');
         $author = Auther::findOrFail($id);
         $validatedData = $request->validated();
         $author->first_name = $request->post('first_name');
@@ -70,6 +73,7 @@ class AutherController extends Controller
 
     public function deleteAuthor($id)
     {
+        $this->authorizeChecked('delete-author');
         $author = Auther::findOrFail($id);
         if ($author->image) {
             $this->deleteImage($author->image); // Delete the associated image

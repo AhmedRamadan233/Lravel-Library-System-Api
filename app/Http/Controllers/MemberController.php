@@ -6,15 +6,18 @@ use App\Models\Member;
 use App\Http\Requests\StoreMemberRequest;
 use App\Http\Requests\UpdateMemberRequest;
 use App\Traits\ImageProcessing;
+use App\Traits\AuthorizeChecked ;
+
 class MemberController extends Controller
 {
-    use ImageProcessing;
+    use ImageProcessing , AuthorizeChecked;
     private function isEmpty($value)
     {
         return $value->count() === 0;
     }
     public function getAllMembers(Request $request)
     {
+        $this->authorizeChecked('list-member');
         $filters = $request->query();
 
         $getAllMembers = Member::filter($filters)->paginate();
@@ -27,6 +30,7 @@ class MemberController extends Controller
     }
     public function createMember(StoreMemberRequest $request)
     {
+        $this->authorizeChecked('add-member');
         $validatedData = $request->validated();
         // Save the member's image and get the image path
         $imagePath = $this->saveImage($request->file('image'));
@@ -47,6 +51,7 @@ class MemberController extends Controller
     
     public function updateMember(UpdateMemberRequest $request, $id)
     {
+        $this->authorizeChecked('update-member');
         $member = Member::findOrFail($id);
         $validatedData = $request->validated();
         $member->first_name = $request->input('first_name');
@@ -73,6 +78,7 @@ class MemberController extends Controller
     
     public function deleteMember($id)
     {
+        $this->authorizeChecked('delete-member');
         $member = Member::findOrFail($id);
         if ($member->image) {
             $this->deleteImage($member->image); // Delete the associated image

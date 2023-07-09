@@ -12,7 +12,7 @@ class UpdateMemberRequest extends FormRequest
     public function authorize(): bool
     {
         // Check if the user can make any permission as "edit"
-        if ($this->user()->can('role-create')) {
+        if ($this->user()->can('update-member')) {
             return true;
         }
         return false;
