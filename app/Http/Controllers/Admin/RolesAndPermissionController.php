@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\RolesAndPermissionUpdateRequest;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Http\Requests\Admin\RolesAndPermissionRequest;
-
+use App\Traits\AuthorizeChecked;
 
 class RolesAndPermissionController extends Controller
 {
+    use AuthorizeChecked;
     // function __construct()
     // {
     //     $this->middleware('auth:api');
@@ -47,7 +49,30 @@ class RolesAndPermissionController extends Controller
         ], 200);
     }
 
-
+    public function update( $id, RolesAndPermissionUpdateRequest $request)
+    {
+        $this->authorizeChecked('role-edit');
+    
+        $role = Role::findOrFail($id);
+    
+        // Check if the requested role name is different from the existing role name
+        if ($role->name !== $request->role) {
+            // Check if a role with the requested name already exists
+            $existingRole = Role::where('name', $request->role)->first();
+            if ($existingRole) {
+                return response()->json(['success' => false, 'error' => 'The role name is already taken.'], 422);
+            }
+    
+            // Update the role's name
+            $role->name = $request->role;
+            $role->save();
+        }
+    
+        $permissions = Permission::whereIn('name', $request->permissions)->get();
+        $role->syncPermissions($permissions);
+    
+        return response()->json(['success' => true, 'data' => $role], 200);
+    }
     public function destroy($id)
     {
    
