@@ -10,6 +10,7 @@ use App\Traits\ImageProcessing;
 use App\Traits\AuthorizeChecked ;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Hash;
 
@@ -100,7 +101,17 @@ class UserController extends Controller
         return response()->json(['members' => $getAllMember]);
     }
    
-   
+    public function getUserData()
+    {
+        $user = Auth::user();
+        
+        // Check if the user is authenticated
+        if ($user) {
+            return response()->json(['user' => $user]);
+        } else {
+            return response()->json(['error' => 'Unauthenticated'], 401);
+        }
+    }
    
    
    
@@ -243,13 +254,13 @@ class UserController extends Controller
     
     
     public function deleteUser($id)
-{
-    // $this->authorizeChecked('delete-user');
-    $user = User::findOrFail($id);
-    if ($user->image) {
-        $this->deleteImage($user->image); // Delete the associated image
+    {
+        // $this->authorizeChecked('delete-user');
+        $user = User::findOrFail($id);
+        if ($user->image) {
+            $this->deleteImage($user->image); // Delete the associated image
+        }
+        $user->delete();
+        return response()->json(['data' => 'Deleted User with ID: '.$id], 200);
     }
-    $user->delete();
-    return response()->json(['data' => 'Deleted User with ID: '.$id], 200);
-}
 }

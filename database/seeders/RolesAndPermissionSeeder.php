@@ -94,6 +94,8 @@ class RolesAndPermissionSeeder extends Seeder
     'role-create',
     'role-edit',
     'role-delete',
+    'update-his-profile',
+
 ];
 
     // Create permissions
@@ -136,6 +138,8 @@ class RolesAndPermissionSeeder extends Seeder
             'role-create',
             'role-edit',
             'role-delete',
+            'update-his-profile',
+
         ],
         'admin' => [
             'list-admin',
@@ -161,6 +165,8 @@ class RolesAndPermissionSeeder extends Seeder
             'add-author',
             'update-author',
             'delete-author',
+            'update-his-profile',
+
         ],
         
         'employee' => [
@@ -183,6 +189,8 @@ class RolesAndPermissionSeeder extends Seeder
             'add-author',
             'update-author',
             'delete-author',
+            'update-his-profile',
+
         ],
         'member' => [
 
@@ -190,6 +198,7 @@ class RolesAndPermissionSeeder extends Seeder
             'list-category',
             'list-member',
             'update-member',
+            'update-his-profile',
             'list-author'
         ],
     ];

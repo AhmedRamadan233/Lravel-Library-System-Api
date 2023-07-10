@@ -83,7 +83,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/{user}', [UserController::class, 'updateUser']);
 
         Route::delete('/{user}', [UserController::class, 'deleteUser']);
-
+        Route::get('/userdata', [UserController::class, 'getUserData']);
+        
     });
 
 });
