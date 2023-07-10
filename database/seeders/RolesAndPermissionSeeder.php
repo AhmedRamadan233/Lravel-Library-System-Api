@@ -184,6 +184,14 @@ class RolesAndPermissionSeeder extends Seeder
             'update-author',
             'delete-author',
         ],
+        'member' => [
+
+            'list-book',
+            'list-category',
+            'list-member',
+            'update-member',
+            'list-author'
+        ],
     ];
 
     // Assign permissions to roles
