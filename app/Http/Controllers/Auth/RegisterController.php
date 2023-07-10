@@ -29,7 +29,7 @@ class RegisterController extends Controller
 
         return response()->json([
             'token' => $token->plainTextToken,
-            'role' => $user->role,
+            'role' => $user->getRoleNames()[0],
             'success' => 'New account successfully created',
         ], 200);
     }

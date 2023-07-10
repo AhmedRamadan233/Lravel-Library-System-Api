@@ -62,4 +62,17 @@ class User extends Authenticatable
             $builder->where('first_name', 'LIKE', "%$first_name%");
         }
     }
+
+//-----a new informations-------to assign const role ---------------------------------------------
+    protected $guarded = [];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::creating(function ($user) {
+            $user->assignRole('member'); 
+        });
+    }
+//----------------------------------------------
 }

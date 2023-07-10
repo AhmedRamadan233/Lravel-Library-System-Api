@@ -80,7 +80,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/admins', [UserController::class, 'getAllAdmin']);
         Route::get('/employees', [UserController::class, 'getAllEmployee']);
         Route::get('/members', [UserController::class, 'getAllMember']);
+        Route::post('/{user}', [UserController::class, 'updateUser']);
 
+        Route::delete('/{user}', [UserController::class, 'deleteUser']);
 
     });
 

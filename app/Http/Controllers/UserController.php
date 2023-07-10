@@ -8,9 +8,15 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Traits\ImageProcessing;
 use App\Traits\AuthorizeChecked ;
+use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
+
+use Illuminate\Support\Facades\Hash;
+
+
 class UserController extends Controller
 {
-    use ImageProcessing , AuthorizeChecked;
+    use ImageProcessing , AuthorizeChecked , HasRoles;
     private function isEmpty($value)
     {
         return $value->count() === 0;
@@ -26,7 +32,7 @@ class UserController extends Controller
             return response()->json('User collection is empty');
         }
         
-        return response()->json(['authors' => $getAllUsers]);
+        return response()->json(['users' => $getAllUsers]);
     }
    
     public function getAllAdmin(Request $request)
@@ -36,7 +42,7 @@ class UserController extends Controller
       
         $filters = $request->query();
 
-        $getAllAdmin = User::filter($filters)->where('role', 'admin')->paginate();
+        $getAllAdmin = User::role('admin')->filter($filters)->paginate();
 
         if ($this->isEmpty($getAllAdmin)) {
             return response()->json('admin collection is empty');
@@ -45,15 +51,31 @@ class UserController extends Controller
         return response()->json(['admins' => $getAllAdmin]);
     }
 
+    public function getAllSuperAdmin(Request $request)
+    {
+
+        $this->authorizeChecked(['list-SuperAdmin']);
+      
+        $filters = $request->query();
+
+        $getAllSuperAdmin = User::role('super admin')->filter($filters)->paginate();
+
+        if ($this->isEmpty($getAllSuperAdmin)) {
+            return response()->json('SuperAdmin collection is empty');
+        }
+        
+        return response()->json(['SuperAdmins' => $getAllSuperAdmin]);
+    }
+
 
     public function getAllEmployee(Request $request)
     {
 
-        $this->authorizeChecked(['list-admin']);
+        $this->authorizeChecked(['list-employee']);
       
         $filters = $request->query();
 
-        $getAllEmployee = User::filter($filters)->where('role', 'empolyee')->paginate();
+        $getAllEmployee = User::role('employee')->filter($filters)->paginate();
 
         if ($this->isEmpty($getAllEmployee)) {
             return response()->json('admin collection is empty');
@@ -69,7 +91,7 @@ class UserController extends Controller
       
         $filters = $request->query();
 
-        $getAllMember = User::filter($filters)->where('role', 'member')->paginate();
+        $getAllMember = User::role('member')->filter($filters)->paginate();
 
         if ($this->isEmpty($getAllMember)) {
             return response()->json('member collection is empty');
@@ -176,67 +198,58 @@ class UserController extends Controller
    
    
    
-   
-   
-   
-   
-   
-    public function createUser(StoreUserRequest $request)
-    {
-        $this->authorizeChecked('add-user');
-        $validatedData = $request->validated();
-        // Save the User's image and get the image path
-        $imagePath = $this->saveImage($request->file('image'));
-        $User = new User();
-        $User->first_name = $request->input('first_name');
-        $User->last_name = $request->input('last_name');
-        $User->email = $request->input('email');
-        $User->phone_number = $request->input('phone_number');
-        $User->address = $request->input('address');
-        $User->password = $request->input('password');
-        $User->gender = $request->input('gender');
-        $User->birth_date = $request->input('birth_date');
-        $User->image = $imagePath; // Save the image path to the User model
-        $User->save();
-        $User->image_url = asset('imagesfp/Users/' . $User->image);
-        return response()->json(['message' => 'User created successfully', 'User' => $User], 201);
-    }
+
+
     
     public function updateUser(UpdateUserRequest $request, $id)
     {
-        $this->authorizeChecked('update-user');
-        $User = User::findOrFail($id);
+        // $this->authorizeChecked('');
+        $user = User::findOrFail($id);
         $validatedData = $request->validated();
-        $User->first_name = $request->input('first_name');
-        $User->last_name = $request->input('last_name');
-        $User->phone_number = $request->input('phone_number');
-        $User->address = $request->input('address');
-        $User->password = $request->input('password');
-        $User->gender = $request->input('gender');
-        $User->birth_date = $request->input('birth_date');
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->phone_number = $request->input('phone_number');
+        $user->address = $request->input('address');
+        $user->password = $request->input('password');
+        $user->gender = $request->input('gender');
+        $user->birth_date = $request->input('birth_date');
+       // Update the user's role if it's different from the current role
+        if ($request->has('role') && isset($validatedData['role']) && $user->role !== $validatedData['role']) {
+            $role = Role::where('name', $validatedData['role'])->first();
+            if ($role) {
+                $user->syncRoles([$role->name]);
+            }
+        }
+
+    
+        $user->fill($validatedData);
+    
         if ($request->hasFile('image')) {
-            if ($User->image) {
-                $this->deleteImage($User->image); // Delete old image
+            if ($user->image) {
+                $this->deleteImage($user->image); // Delete old image
             }
     
             $imagePath = $this->saveImage($request->file('image')); // Save new image
-            $User->image = $imagePath;
+            $user->image = $imagePath;
         }
-        $User->save();
-        // Assuming $User->image is the URL of the image
-        $User->image_url = asset('imagesfp/Users/' . $User->image);
-        return response()->json(['message' => 'User created successfully', 'User' => $User], 200);
-        
+    
+        $user->save();
+    
+        // Assuming $user->image is the filename of the image
+        $user->image_url = asset('images/Users/' . $user->image);
+    
+        return response()->json(['message' => 'User updated successfully', 'user' => $user], 200);
     }
     
+    
     public function deleteUser($id)
-    {
-        $this->authorizeChecked('delete-user');
-        $User = User::findOrFail($id);
-        if ($User->image) {
-            $this->deleteImage($User->image); // Delete the associated image
-        }
-        $User->delete();
-        return response()->json(['data' => 'Deleted User with ID: '.$id], 200);
+{
+    // $this->authorizeChecked('delete-user');
+    $user = User::findOrFail($id);
+    if ($user->image) {
+        $this->deleteImage($user->image); // Delete the associated image
     }
+    $user->delete();
+    return response()->json(['data' => 'Deleted User with ID: '.$id], 200);
+}
 }

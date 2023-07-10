@@ -26,7 +26,16 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => 'required|email',
+            'password' => 'required|string|min:6',
+            'gender' => 'nullable|in:male,female,other',
+            'hire_date' => 'nullable|date',
+            'salary' => 'nullable|numeric',
+            'birth_date' => 'nullable|date',
+            'image' => 'nullable|image',
+            'role' => 'nullable|in:employee,member,admin,super admin',
         ];
     }
 }
