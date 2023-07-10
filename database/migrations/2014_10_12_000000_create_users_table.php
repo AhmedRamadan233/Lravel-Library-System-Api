@@ -21,10 +21,12 @@ return new class extends Migration
             $table->rememberToken();
             $table->enum('gender',['male' , 'female' , 'other'])->nullable();
             $table->date('hire_date')->default(now());
-            $table->float('salary')->default(3500);
+            $table->float('salary')->nullable();
             $table->date('birth_date')->nullable();
             $table->string('image')->nullable();
-            $table->enum('role' , ['employee' , 'admin' , 'super admin'])->nullable()->default('employee');
+            $table->string('phone_number')->nullable();
+            $table->date('banded_at')->nullable();
+            $table->json('address')->nullable();
             $table->timestamps();
         });
     }

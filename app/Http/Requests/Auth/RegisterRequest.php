@@ -31,7 +31,7 @@ class RegisterRequest extends FormRequest
             'salary' => 'nullable|numeric',
             'birth_date' => 'nullable|date',
             'image' => 'nullable|image',
-            'role' => 'nullable|in:employee,admin,super admin',
+            'role' => 'nullable|in:employee,member,admin,super admin',
         ];
     }
 }

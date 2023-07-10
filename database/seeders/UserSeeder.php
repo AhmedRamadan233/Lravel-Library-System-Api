@@ -24,6 +24,8 @@ class UserSeeder extends Seeder
             'birth_date' => null,
             'image' => null,
             'password' => Hash::make('password'),
+
+
         ]);
 
         $superAdminRole = Role::where('name', 'super admin')->first();
@@ -40,6 +42,8 @@ class UserSeeder extends Seeder
             'birth_date' => null,
             'image' => null,
             'password' => Hash::make('password'),
+
+
         ]);
 
         $adminRole = Role::where('name', 'admin')->first();
@@ -56,6 +60,7 @@ class UserSeeder extends Seeder
             'birth_date' => null,
             'image' => null,
             'password' => Hash::make('password'),
+
         ]);
 
         $employeeRole = Role::where('name', 'employee')->first();

@@ -12,6 +12,8 @@ use App\Http\Controllers\AutherController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MemberController;
 
+use App\Http\Controllers\UserController;
+
 use App\Http\Controllers\Admin\RolesAndPermissionController;
 
 
@@ -74,7 +76,12 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('users')->group(function () {
-        Route::get('/', [BookController::class, 'getAllBooks']);
+        Route::get('/', [UserController::class, 'getAllUsers']);
+        Route::get('/admins', [UserController::class, 'getAllAdmin']);
+        Route::get('/employees', [UserController::class, 'getAllEmployee']);
+        Route::get('/members', [UserController::class, 'getAllMember']);
+
+
     });
 
 });

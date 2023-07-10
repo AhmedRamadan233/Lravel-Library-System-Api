@@ -23,14 +23,13 @@ class RegisterController extends Controller
             'salary' => $validatedData['salary'] ?? 3500,
             'birth_date' => $validatedData['birth_date'],
             'image' => $validatedData['image'] ?? null,
-            'role' => $validatedData['role'] ?? 'employee',
         ]);
 
         $token = $user->createToken('user', ['app:all']);
 
         return response()->json([
             'token' => $token->plainTextToken,
-            'name' => $user->first_name,
+            'role' => $user->role,
             'success' => 'New account successfully created',
         ], 200);
     }

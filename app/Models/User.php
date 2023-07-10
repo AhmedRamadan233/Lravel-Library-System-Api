@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -27,7 +29,6 @@ class User extends Authenticatable
         'salary',
         'birth_date',
         'image',
-        'role',
     ];
 
     /**
@@ -49,4 +50,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getImageUrlAttribute()
+    {
+        return asset('imagesfp/' . $this->image);
+    }
+    public function scopeFilter(Builder $builder, $filters)
+    {
+        $first_name = $filters['first_name'] ?? null;
+        if ($first_name) {
+            $builder->where('first_name', 'LIKE', "%$first_name%");
+        }
+    }
 }

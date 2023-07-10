@@ -21,7 +21,7 @@ class LoginController extends Controller
             $token = $user->createToken(request()->userAgent());
             return response()->json([
                 'token' => $token->plainTextToken,
-                'name' => $user->first_name,
+                'role' => $user->getRoleNames()[0],
                 'success' => "Login successful",
             ], 200);
         } else {
