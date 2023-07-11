@@ -1,0 +1,1716 @@
+{
+	"info": {
+		"_postman_id": "d4a7d6d8-9221-4ffd-b8e8-392d2a8ab6af",
+		"name": "zzzlaravel-library-system-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20922977"
+	},
+	"item": [
+		{
+			"name": "Login And Rgister",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "mamber",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "member",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "member@member.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								},
+								{
+									"key": "hire_date",
+									"value": "2023-07-01",
+									"type": "text"
+								},
+								{
+									"key": "birth_date",
+									"value": "1998-07-01",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "super admin",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "member@member.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"login"
+							],
+							"query": [
+								{
+									"key": "emain",
+									"value": "ahmedromio233@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "ahmed@123",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "getAllBook",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "7|89b7zMxbBt28qiLcV7LtONSfqc3CQYmCNTEwo3dQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "Ahmed",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Ramadan",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ahmedromio233@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ahmed@123",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "super admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"books"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "Vitae ipsa ut omnis harum nihil",
+									"disabled": true
+								},
+								{
+									"key": "publisher",
+									"value": "Vitae ipsa ut omnis harum nihil",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "doloribus",
+									"disabled": true
+								},
+								{
+									"key": "author",
+									"value": "Norene",
+									"disabled": true
+								},
+								{
+									"key": "availablegt",
+									"value": "5",
+									"disabled": true
+								},
+								{
+									"key": "availablelt",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createBook",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "7|89b7zMxbBt28qiLcV7LtONSfqc3CQYmCNTEwo3dQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "my book",
+									"type": "text"
+								},
+								{
+									"key": "author_id",
+									"value": "11",
+									"type": "text"
+								},
+								{
+									"key": "publisher",
+									"value": "ahmed ramadan",
+									"type": "text"
+								},
+								{
+									"key": "publishing_date",
+									"value": "2023-07-01 12:00:00",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "edition",
+									"value": "second eddition",
+									"type": "text"
+								},
+								{
+									"key": "pages",
+									"value": "120",
+									"type": "text"
+								},
+								{
+									"key": "num_of_copies",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "available",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "shelf_num",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "num_of_borrowing",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "num_of_reading",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/w/Desktop/AHMED/1962023/cv to me/15288682_117010885454729_7025754447202992411_o.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateBook",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|B4oYD37R85QNOkmR7tDRxFOQJTlfcL95QmkuD7xG",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "my name is ahmed",
+									"type": "text"
+								},
+								{
+									"key": "author_id",
+									"value": "15",
+									"type": "text"
+								},
+								{
+									"key": "publisher",
+									"value": "ahmed ramadan",
+									"type": "text"
+								},
+								{
+									"key": "publishing_date",
+									"value": "2023-07-01 12:00:00",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "edition",
+									"value": "second eddition",
+									"type": "text"
+								},
+								{
+									"key": "pages",
+									"value": "120",
+									"type": "text"
+								},
+								{
+									"key": "num_of_copies",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "available",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "shelf_num",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "num_of_borrowing",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "num_of_reading",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/w/Pictures/Screenshots/Screenshot (29).png"
+								},
+								{
+									"key": "method",
+									"value": "put",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/books/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"books",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteBook",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|agdgVFjicrmZveb3kEGFRxSQIuPeYBdTU3CpeaUy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "my book",
+									"type": "text"
+								},
+								{
+									"key": "author_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "publisher",
+									"value": "ahmed ramadan",
+									"type": "text"
+								},
+								{
+									"key": "publishing_date",
+									"value": "2023-07-01 12:00:00",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "edition",
+									"value": "second eddition",
+									"type": "text"
+								},
+								{
+									"key": "pages",
+									"value": "120",
+									"type": "text"
+								},
+								{
+									"key": "num_of_copies",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "available",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "shelf_num",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "num_of_borrowing",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "num_of_reading",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/w/Pictures/Screenshots/Screenshot (2).png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/books/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"books",
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "getAllUsers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|9t50mOwdqI619cqOtmrDr9k0zhC8t7vyOZqOueFk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "Ahmed",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Ramadan",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ahmedromio233@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ahmed@123",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "super admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserData",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|BiYqX0epVKOT4HKKJP9c2pZfVPZIXgMP3k5y6i0U",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "Ahmed",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Ramadan",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ahmedromio233@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ahmed@123",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "super admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/userdata",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"userdata"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUsers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|BiYqX0epVKOT4HKKJP9c2pZfVPZIXgMP3k5y6i0U",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "Ahmed",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Ranmadan",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "aaaa@gmail.comd",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "01020412199",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "{\"street\": \"123 Main St\", \"city\": \"New York\", \"state\": \"NY\", \"zip\": \"10001\"}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ahmed@123",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								},
+								{
+									"key": "birth_date",
+									"value": "1998-05-26",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/w/Pictures/Screenshots/Screenshot (26).png"
+								},
+								{
+									"key": "method",
+									"value": "put",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "super admin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatehisprofile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|9t50mOwdqI619cqOtmrDr9k0zhC8t7vyOZqOueFk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "Ahmed",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Ranmadan",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "aaaa@gmail.comd",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "01020412199",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "{\"street\": \"123 Main St\", \"city\": \"New York\", \"state\": \"NY\", \"zip\": \"10001\"}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ahmed@123",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								},
+								{
+									"key": "birth_date",
+									"value": "1998-05-26",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/w/Pictures/Screenshots/Screenshot (26).png"
+								},
+								{
+									"key": "method",
+									"value": "put",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "super admin",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/userdata",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"userdata"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteMember",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "15|WRjtf9yGwTGjSkjwuwMcdbNdnVbNi88lqwhtBDQz",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "Ahmed",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Ramadan",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ahmedromio233@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ahmed@123",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "super admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "getAllCategories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "7|89b7zMxbBt28qiLcV7LtONSfqc3CQYmCNTEwo3dQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createCategory",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|agdgVFjicrmZveb3kEGFRxSQIuPeYBdTU3CpeaUy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "ahmed",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"categories"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "ammmm",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updareCategory",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|agdgVFjicrmZveb3kEGFRxSQIuPeYBdTU3CpeaUy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "aa",
+									"type": "text"
+								},
+								{
+									"key": "method",
+									"value": "put",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/categories/21",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"categories",
+								"21"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "mostafa",
+									"disabled": true
+								},
+								{
+									"key": "method",
+									"value": "put",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCategory",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|agdgVFjicrmZveb3kEGFRxSQIuPeYBdTU3CpeaUy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/categories/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"categories",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auther",
+			"item": [
+				{
+					"name": "getAllAuthor",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|5WEtdLliRxTmS6atsTSV6qGf3t2PbuJjomAxRlan",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "Ahmed",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Ramadan",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ahmedromio233@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ahmed@123",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "super admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/authors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"authors"
+							],
+							"query": [
+								{
+									"key": "first_name",
+									"value": "Norene",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createAuthor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|agdgVFjicrmZveb3kEGFRxSQIuPeYBdTU3CpeaUy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "ahmed",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "ramadan",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ahmedramadan@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "secret123",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/w/Desktop/AHMED/1962023/cv to me/15288682_117010885454729_7025754447202992411_o.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/authors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"authors"
+							],
+							"query": [
+								{
+									"key": "first_name",
+									"value": "ahmed",
+									"disabled": true
+								},
+								{
+									"key": "last_name",
+									"value": "ramadan",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "ahmed_love252574@yahoo.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "1236453",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateAuthor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|agdgVFjicrmZveb3kEGFRxSQIuPeYBdTU3CpeaUy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "ahmed",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "ramadan",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ahmedro4854mio233@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "secret123",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/w/Desktop/AHMED/1962023/cv to me/15288682_117010885454729_7025754447202992411_o.jpg"
+								},
+								{
+									"key": "method",
+									"value": "put",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/authors/21",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"authors",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAuthor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|agdgVFjicrmZveb3kEGFRxSQIuPeYBdTU3CpeaUy",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/authors/21",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"authors",
+								"21"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RolesAndPermissions",
+			"item": [
+				{
+					"name": "getRoles && Permissions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "6|At7uddtOlEovzRSLQDzUWymSE9rJTyMvkPVqNQA6",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "Ahmed",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Ramadan",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ahmedromio233@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ahmed@123",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "super admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createRole",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|yNX2OUzjhvwT2UTMqSx3nSYX58YMqwYe4SnoMcRF",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\": \"member\",\r\n    \"permissions\": [\r\n        \"list-book\",\r\n        \"list-category\",\r\n        \"list-member\",\r\n        \"update-member\",\r\n        \"list-author\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"roles"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "ahmed",
+									"disabled": true
+								},
+								{
+									"key": "last_name",
+									"value": "ramadan",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "ahmed_love252574@yahoo.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "1236453",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateAuthor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "7|kun2b5EJ26wqN62rmapJnlkbQSx5r5UszheZNnD4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\":\"ss\",\r\n    \"permissions\": [\r\n        \"view-profile-member\",\r\n        \"update-profile-member\",\r\n        \"list-reading-books\",\r\n        \"filter-reading-books\",\r\n        \"list-borrowed-books\",\r\n        \"filter-borrowed-books\",\r\n        \"view-new-arrived-books\",\r\n        \"view-borrowed-books\",\r\n        \"search-books\",\r\n        \"search-available-books\",\r\n        \"view-new-arrived-books-stats\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/roles/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"roles",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteRole",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "6|9bScB8U7tMMu27ci6pRg7c3gcvrwKrkUI4GcgJwP",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/roles/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"roles",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
